@@ -1,0 +1,51 @@
+#Crie um vetor com ponteiros utilizando alocação dinâmica na linguagem C, que:
+
+#- use a função realloc;
+#- use a função sizeof;
+#- que tenha tamanho 22 de vetor;
+#- depois libere o bloco utilizando a função free.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main (){
+    int i, tam, *vet;
+
+    printf("Digite o tamanho do vetor:\n");
+    scanf("%d", &tam);
+    srand(time(NULL));
+
+    vet = malloc(tam * sizeof(int));
+
+    if(vet) {
+              printf("Memoria alocado com sucesso!\n ");
+        for (i = 0; i < tam; i++)
+             *(vet + i) = rand() % 100;
+
+        for (i = 0; i < tam; i++)
+             printf("%d ", *(vet + i));    
+        printf("\n");
+
+        printf("Digite o novo tamanho do vetor:\n");
+        scanf("%d", &tam);
+
+        vet = realloc(vet, tam);
+
+        printf("\nVetor realocado:\n");
+        for(i = 0; i < tam; i++)
+            printf("%d ", *(vet + i));    
+        printf("\n");
+
+        free(vet);
+    }
+    else{
+        printf("Erro ao alocar memoria!\n");
+    }
+
+    return 0;
+}
+
+
